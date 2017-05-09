@@ -1,0 +1,35 @@
+- Create company, employee and city tables
+
+- Company:
+Id
+Name
+
+- Employee:
+Id
+First Name
+Last Name
+
+- City
+Id
+Name
+Country
+
+One company may have many employees
+An employee lives in a city.
+
+
+1. Create tables in database
+2. Create JPA entities
+3. Create end-points (JSON input and output) for CRUD operations for Company, Employee and City.
+4. Create end-point (JSON output) to report the list of users showing:
+User Id - Complete user name (first name and last name in the same column) - Employee's city name - Employee's company name.
+!!! Don't show/retrieve city or company id !!!
+
+- Using JPARepository or CRUDRepository is suggested.
+- Command to run the project: mvn spring-boot:run
+- Web Context is e3Test
+
+You will receive extra points for: 
+Create local git project for this project, Junit tests, Front end development and Validations (back-end or front-end)
+
+Eveything will be evaluated, not only the result.
