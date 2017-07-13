@@ -13,7 +13,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstName;
-    private String lastNamel;
+    private String lastName;
 
     public Integer getId() {
         return id;
@@ -31,11 +31,11 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getLastNamel() {
-        return lastNamel;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastNamel(String lastNamel) {
-        this.lastNamel = lastNamel;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
