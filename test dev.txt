@@ -1,6 +1,21 @@
 Given the following tables:
 
+create schema e3test;
 
+use e3test;
+
+CREATE TABLE Company (
+   id INT AUTO_INCREMENT NOT NULL,
+   name VARCHAR(100),
+  PRIMARY KEY (id)
+) ENGINE = InnoDB ROW_FORMAT = DEFAULT;
+
+CREATE TABLE employee (
+   id INT AUTO_INCREMENT NOT NULL,
+   first_name VARCHAR(100),
+   last_name VARCHAR(100),
+  PRIMARY KEY (id)
+) ENGINE = InnoDB ROW_FORMAT = DEFAULT;
 
 - Company:
 Id
