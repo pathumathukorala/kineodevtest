@@ -4,7 +4,7 @@ create schema e3test;
 
 use e3test;
 
-CREATE TABLE Company (
+CREATE TABLE company (
    id INT AUTO_INCREMENT NOT NULL,
    name VARCHAR(100),
   PRIMARY KEY (id)
@@ -16,6 +16,7 @@ CREATE TABLE employee (
    last_name VARCHAR(100),
   PRIMARY KEY (id)
 ) ENGINE = InnoDB ROW_FORMAT = DEFAULT;
+
 
 - Company:
 Id
@@ -30,20 +31,29 @@ Last Name
 - Database tables are provided.
 - Initial JPA entities are provided.
 
-Requirements 1 and 2 are mandatory, work on the other requirements in any order:
+Requirements 1 and 2 are mandatory. The other requirements are in a suggested order, however you may work on them in any order you like.
 
 1. A company may have many employees and one employee can only work for one company. Please add this relationship to the database tables.
 2. Add the previous relationship to the JPA entities.
-3. Create the REST end-point to create Employees in the system.
-4. Create REST end-point to Delete an employee.
+
+3. Create REST end-point to delete an employee by id.
+4. Create REST end-point to delete a company by id. Companies can only be deleted if they no longer have employees.
 5. Create a "Search" REST end-point to search employees by any of the "Employee" table fields (Id, First Name or Last Name). The result should be ordered by First Name alphabetically.
-6. Create REST end-point to Delete a Company. Companies can only be deleted if it doesn't have employees.
+6. Create the REST end-point to create and update Employees in the system. The endpoint should support updating First Name, Last Name and Company. First Name and Last Name can contain only the following characters: A-Z, a-z, apostrophe ('), hyphen (-) and white space.
+7. Extend the search end-point created in (5) to search employee by Company Name or Company Id. Update the endpoint to first group employees by company, then order by first name alphabetically.
 
-- 
-- Command to run the project: mvn spring-boot:run
-- Web Context is e3Test
+- Command to run the project: mvn install spring-boot:run
+- Application will be available at http://localhost:8080
+
+Eveything will be evaluated, not only the result. 
+
+Some Test data to help you out:
+
+insert into employee values (1, 'Joe', 'Jones');
+insert into employee values (2, 'Bob', 'Brown');
+insert into employee values (3, 'Annie', 'Armstrong');
+insert into employee values (4, 'Susan', 'Smith');
 
 
-You will receive extra points for Junit tests and Validations
-
-Eveything will be evaluated, not only the result.
+insert into company values (1, 'Kineo');
+insert into company values (2, 'Hungry Jacks');
