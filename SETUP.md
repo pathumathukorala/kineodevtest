@@ -8,13 +8,15 @@
 
 ## Database Setup
 
-Run `setup.sql` to create the schema and test data.
+Run `setup.sql` against your database to create the schema and test data.
 
 ## Application Configuration
 
 Update `src/main/resources/application.properties` with your database username and password.
 
 ## Build and Run
+
+The project is a spring boot project. The following command will build the module, run tests and start an application server:
 
 `mvn install spring-boot:run`
 
