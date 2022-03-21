@@ -2,6 +2,8 @@
 
 You are developing an application to manage employees at different companies. You are required to implement the following features.
 
+## Requirements
+
 Requirements 1 and 2 are mandatory. The other requirements are in a suggested order, however you may work on them in any order you like.
 
 1. A company may have many employees and one employee can only work for one company. Please add this relationship to the database tables.
@@ -15,15 +17,23 @@ Requirements 1 and 2 are mandatory. The other requirements are in a suggested or
 
 Everything will be evaluated, not only the result.
 
+## Database Schema
+
 The following database tables and test data are provided. See setup.sql.
 
-- Company:
+Company:
+
   - id
   - name
 
-- Employee:
+Employee:
+
   - id
   - first_name
   - last_name
   
 Initial JPA entities are provided. 
+
+## Submitting
+
+Publish your solution to github or bitbucket and send a link to your repository.
