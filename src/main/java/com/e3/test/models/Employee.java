@@ -25,6 +25,13 @@ public class Employee {
     @JsonIgnore
     private Company company;
 
+    public Employee(Long id, String firstName, String lastName, Company company) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.company = company;
+    }
+
     public Long getId() {
         return id;
     }
