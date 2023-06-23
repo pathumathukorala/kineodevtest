@@ -1,4 +1,4 @@
-package com.e3.test.model;
+package com.e3.test.models;
 
 import javax.persistence.*;
 
@@ -10,6 +10,11 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    public Company(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
