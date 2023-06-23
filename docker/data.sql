@@ -25,3 +25,7 @@ insert into employee values (4, 'Susan', 'Smith');
 
 insert into company values (1, 'Kineo');
 insert into company values (2, 'Hungry Jacks');
+
+create user 'e3testuser'@'%' identified by 'e3testpassword';
+grant all privileges on e3test.* to 'e3testuser'@'%' with grant option;
+flush privileges;
