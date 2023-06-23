@@ -1,9 +1,9 @@
-package com.e3.test.contollers;
+package com.e3.test.contoller;
 
-import com.e3.test.data.EmployeeRepository;
+import com.e3.test.repository.EmployeeRepository;
 import org.springframework.web.bind.annotation.*;
 
-import com.e3.test.models.Employee;
+import com.e3.test.entity.Employee;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,6 +19,11 @@ public class EmployeeController {
 	public @ResponseBody
 	Employee getEmployee(@PathVariable Long employeeId) {
 		return employeeRepository.findOne(employeeId);
+	}
+
+	@DeleteMapping(value = "/{employeeId}")
+	public void deleteEmployee(@PathVariable Long employeeId) {
+		employeeRepository.delete(employeeId);
 	}
 
 }

@@ -1,9 +1,9 @@
-package com.e3.test.contollers;
+package com.e3.test.contoller;
 
-import com.e3.test.data.CompanyRepository;
+import com.e3.test.repository.CompanyRepository;
 import org.springframework.web.bind.annotation.*;
 
-import com.e3.test.models.Company;
+import com.e3.test.entity.Company;
 
 @RestController
 @RequestMapping("/company")
