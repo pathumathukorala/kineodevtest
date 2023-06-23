@@ -29,3 +29,10 @@ insert into company values (2, 'Hungry Jacks');
 create user 'e3testuser'@'%' identified by 'e3testpassword';
 grant all privileges on e3test.* to 'e3testuser'@'%' with grant option;
 flush privileges;
+
+ALTER TABLE employee
+ADD COLUMN company_id INT NOT NULL
+DEFAULT 1;
+
+ALTER TABLE employee
+ADD CONSTRAINT fk_company_id FOREIGN KEY (company_id) REFERENCES company(id);

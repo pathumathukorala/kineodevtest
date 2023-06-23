@@ -1,4 +1,4 @@
-package com.e3.test.model;
+package com.e3.test.models;
 
 import javax.persistence.*;
 
