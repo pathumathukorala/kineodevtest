@@ -1,9 +1,9 @@
 package com.e3.controllers;
 
-import com.e3.test.contollers.EmployeeController;
-import com.e3.test.data.EmployeeRepository;
-import com.e3.test.models.Company;
-import com.e3.test.models.Employee;
+import com.e3.test.contoller.EmployeeController;
+import com.e3.test.repository.EmployeeRepository;
+import com.e3.test.entity.Company;
+import com.e3.test.entity.Employee;
 import org.junit.Before;
 import org.junit.Test;
 

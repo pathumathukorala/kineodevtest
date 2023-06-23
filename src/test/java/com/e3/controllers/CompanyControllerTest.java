@@ -1,8 +1,8 @@
 package com.e3.controllers;
 
-import com.e3.test.contollers.CompanyController;
-import com.e3.test.data.CompanyRepository;
-import com.e3.test.models.Company;
+import com.e3.test.contoller.CompanyController;
+import com.e3.test.repository.CompanyRepository;
+import com.e3.test.entity.Company;
 import org.junit.Before;
 import org.junit.Test;
 
