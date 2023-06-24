@@ -3,6 +3,7 @@ package com.e3.controllers;
 import com.e3.test.contoller.CompanyController;
 import com.e3.test.repository.CompanyRepository;
 import com.e3.test.entity.Company;
+import com.e3.test.service.CompanyService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,19 +12,19 @@ import static org.junit.Assert.*;
 
 public class CompanyControllerTest {
 
-    private CompanyRepository companyRepository;
+    private CompanyService companyService;
     private CompanyController companyController;
 
     @Before
     public void initialize() {
-        companyRepository = mock(CompanyRepository.class);
-        companyController = new CompanyController(companyRepository);
+        companyService = mock(CompanyService.class);
+        companyController = new CompanyController(companyService);
     }
 
     @Test
     public void testGetCompanySuccess() {
         Company company = new Company(1L, "TestCompany");
-        when(companyRepository.findOne(anyLong())).thenReturn(company);
+        when(companyService.findCompanyById(anyLong())).thenReturn(company);
 
         Company expectedCompany = companyController.getCompany(1L);
 
@@ -34,7 +35,7 @@ public class CompanyControllerTest {
 
     @Test
     public void testGetCompanyFailure() {
-        when(companyRepository.findOne(anyLong())).thenReturn(null);
+        when(companyService.findCompanyById(anyLong())).thenReturn(null);
 
         Company expectedCompany = companyController.getCompany(999L);
 
