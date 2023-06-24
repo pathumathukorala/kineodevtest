@@ -1,7 +1,10 @@
 package com.e3.test.service;
 
+import com.e3.test.dto.EmployeeRequestDto;
 import com.e3.test.dto.EmployeeSearchDto;
+import com.e3.test.entity.Company;
 import com.e3.test.entity.Employee;
+import com.e3.test.repository.CompanyRepository;
 import com.e3.test.repository.EmployeeRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,9 +19,11 @@ import static com.e3.test.search.SearchSpecification.*;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final CompanyRepository companyRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, CompanyRepository companyRepository) {
         this.employeeRepository = employeeRepository;
+        this.companyRepository = companyRepository;
     }
 
     public Employee getEmployeeById(Long employeeId) {
@@ -60,5 +65,20 @@ public class EmployeeService {
                 new Sort(Sort.Direction.ASC, "firstName"));
 
         return employees;
+    }
+
+    public Employee saveEmployee(EmployeeRequestDto requestDto) {
+        Company company = companyRepository.findOne(requestDto.getCompanyId());
+
+        if (company != null) {
+            Employee employee = Employee.build(requestDto.getId(),
+                    requestDto.getFirstName(), requestDto.getLastName(), company);
+
+            return employeeRepository.save(employee);
+        }
+        else {
+            // TODO throw businessexception
+            return null;
+        }
     }
 }

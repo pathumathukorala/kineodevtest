@@ -22,7 +22,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void testGetEmployeeSuccess() {
-        Employee employee = new Employee(1L, "firstName", "lastName",
+        Employee employee = Employee.build(1L, "firstName", "lastName",
                 new Company(1L, "TestCompany"));
 
         when(employeeService.getEmployeeById(anyLong())).thenReturn(employee);

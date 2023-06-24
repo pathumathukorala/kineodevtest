@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employee")
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
 public class Employee {
 

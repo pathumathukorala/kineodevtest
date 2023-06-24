@@ -1,11 +1,13 @@
 package com.e3.test.contoller;
 
+import com.e3.test.dto.EmployeeRequestDto;
 import com.e3.test.dto.EmployeeSearchDto;
 import com.e3.test.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import com.e3.test.entity.Employee;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +63,11 @@ public class EmployeeController {
 		}
 
 		return employeeService.searchEmployees(searchDto);
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.PUT)
+	public @ResponseBody Employee createEmployee(@RequestBody @Valid EmployeeRequestDto requestDto) {
+		return employeeService.saveEmployee(requestDto);
 	}
 
 }
