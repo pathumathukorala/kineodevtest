@@ -1,9 +1,9 @@
 package com.e3.controllers;
 
 import com.e3.test.contoller.EmployeeController;
-import com.e3.test.repository.EmployeeRepository;
 import com.e3.test.entity.Company;
 import com.e3.test.entity.Employee;
+import com.e3.test.service.EmployeeService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,13 +11,13 @@ import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class EmployeeControllerTest {
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
     private EmployeeController employeeController;
 
     @Before
     public void initialize() {
-        employeeRepository = mock(EmployeeRepository.class);
-        employeeController = new EmployeeController(employeeRepository);
+        employeeService = mock(EmployeeService.class);
+        employeeController = new EmployeeController(employeeService);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class EmployeeControllerTest {
         Employee employee = new Employee(1L, "firstName", "lastName",
                 new Company(1L, "TestCompany"));
 
-        when(employeeRepository.findOne(anyLong())).thenReturn(employee);
+        when(employeeService.getEmployeeById(anyLong())).thenReturn(employee);
 
         Employee expectedEmployee = employeeController.getEmployee(1L);
 
@@ -40,7 +40,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void testGetEmployeeFailure() {
-        when(employeeRepository.findOne(anyLong())).thenReturn(null);
+        when(employeeService.getEmployeeById(anyLong())).thenReturn(null);
 
         Employee expectedEmployee = employeeController.getEmployee(999L);
 
