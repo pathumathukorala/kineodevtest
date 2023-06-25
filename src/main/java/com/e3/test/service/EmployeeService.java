@@ -8,6 +8,8 @@ import com.e3.test.exception.BusinessException;
 import com.e3.test.exception.ValidationException;
 import com.e3.test.repository.CompanyRepository;
 import com.e3.test.repository.EmployeeRepository;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import static com.e3.test.search.SearchSpecification.*;
 
 @Service
 public class EmployeeService {
+
+    Logger logger = LogManager.getLogger(EmployeeService.class);
 
     private final EmployeeRepository employeeRepository;
     private final CompanyRepository companyRepository;
@@ -32,9 +36,11 @@ public class EmployeeService {
         Employee employee = employeeRepository.findOne(employeeId);
 
         if (employee == null) {
+            logger.error("Attempt to fetch unavailable employee. employeeId: " + employeeId);
             throw new BusinessException("ERR_003");
         }
 
+        logger.info("Employee fetch: " + employee);
         return employee;
     }
 
@@ -42,6 +48,7 @@ public class EmployeeService {
         Employee employee = employeeRepository.findOne(employeeId);
 
         if (employee == null) {
+            logger.error("Attempt to delete unavailable employee. employeeId: " + employeeId);
             throw new BusinessException("ERR_003");
         }
 
@@ -49,6 +56,7 @@ public class EmployeeService {
             employeeRepository.delete(employeeId);
         }
         catch (Exception ex) {
+            logger.error("Failure in deleting employee. employeeId: " + employeeId);
             throw new BusinessException("ERR_004");
         }
     }
@@ -85,6 +93,7 @@ public class EmployeeService {
 
         if (requestDto.getId() == null &&
                 employeeRepository.isEmployeeAlreadyRegistered(requestDto.getFirstName(), requestDto.getLastName()) != 0) {
+            logger.error("Duplicate employee creation" + requestDto);
             throw new ValidationException("ERR_006");
         }
 
@@ -94,9 +103,11 @@ public class EmployeeService {
             Employee employee = Employee.build(requestDto.getId(),
                     requestDto.getFirstName(), requestDto.getLastName(), company);
 
+            logger.info("Employee created. " + employee);
             return employeeRepository.save(employee);
         }
         else {
+            logger.error("Attempt to create employee for invalid company. Request: " + requestDto);
             throw new BusinessException("ERR_002");
         }
     }

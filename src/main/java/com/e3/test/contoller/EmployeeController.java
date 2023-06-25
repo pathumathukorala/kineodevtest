@@ -3,6 +3,8 @@ package com.e3.test.contoller;
 import com.e3.test.dto.EmployeeRequestDto;
 import com.e3.test.dto.EmployeeSearchDto;
 import com.e3.test.service.EmployeeService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import com.e3.test.entity.Employee;
@@ -15,6 +17,8 @@ import java.util.Optional;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+	Logger logger = LogManager.getLogger(EmployeeController.class);
+
 	private final EmployeeService employeeService;
 
 	public EmployeeController(EmployeeService employeeService) {
@@ -24,11 +28,13 @@ public class EmployeeController {
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.GET)
 	public @ResponseBody
 	Employee getEmployee(@PathVariable Long employeeId) {
+		logger.debug("Fetching employee from ID: " + employeeId);
 		return employeeService.getEmployeeById(employeeId);
 	}
 
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.DELETE)
 	public void deleteEmployee(@PathVariable Long employeeId) {
+		logger.debug("Deleting employee from ID: " + employeeId);
 		employeeService.deleteEmployeeById(employeeId);
 	}
 
@@ -62,11 +68,15 @@ public class EmployeeController {
 			searchDto.setCompanyName(companyName.get());
 		}
 
+		logger.debug("Searching employees... " + searchDto);
+
 		return employeeService.searchEmployees(searchDto);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	public @ResponseBody Employee createEmployee(@RequestBody @Valid EmployeeRequestDto requestDto) {
+		logger.debug("Creating/ Updating employee");
+
 		return employeeService.saveEmployee(requestDto);
 	}
 
