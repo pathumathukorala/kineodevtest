@@ -51,7 +51,6 @@ public class EmployeeService {
         catch (Exception ex) {
             throw new BusinessException("ERR_004");
         }
-
     }
 
     public List<Employee> searchEmployees(EmployeeSearchDto searchDto) {
@@ -78,10 +77,8 @@ public class EmployeeService {
             searchSpec = hasCompanyName(searchDto.getCompanyName());
         }
 
-        List<Employee> employees = employeeRepository.findAll(searchSpec,
+        return employeeRepository.findAll(searchSpec,
                 new Sort(Sort.Direction.ASC, "firstName"));
-
-        return employees;
     }
 
     public Employee saveEmployee(EmployeeRequestDto requestDto) {
