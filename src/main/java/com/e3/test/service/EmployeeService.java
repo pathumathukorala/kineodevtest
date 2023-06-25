@@ -5,6 +5,7 @@ import com.e3.test.dto.EmployeeSearchDto;
 import com.e3.test.entity.Company;
 import com.e3.test.entity.Employee;
 import com.e3.test.exception.BusinessException;
+import com.e3.test.exception.ValidationException;
 import com.e3.test.repository.CompanyRepository;
 import com.e3.test.repository.EmployeeRepository;
 import org.springframework.data.domain.Sort;
@@ -84,10 +85,15 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(EmployeeRequestDto requestDto) {
+
+        if (requestDto.getId() == null &&
+                employeeRepository.isEmployeeAlreadyRegistered(requestDto.getFirstName(), requestDto.getLastName()) != 0) {
+            throw new ValidationException("ERR_006");
+        }
+
         Company company = companyRepository.findOne(requestDto.getCompanyId());
 
         if (company != null) {
-
             Employee employee = Employee.build(requestDto.getId(),
                     requestDto.getFirstName(), requestDto.getLastName(), company);
 

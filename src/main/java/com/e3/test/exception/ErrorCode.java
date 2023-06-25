@@ -7,6 +7,7 @@ public enum ErrorCode {
     ERR_003("ERR_003", "Unable to find an employee matching the given Employee ID."),
     ERR_004("ERR_004", "Unable to delete the employee from the records. "),
     ERR_005("ERR_005", "Request validation error"),
+    ERR_006("ERR_006", "Unable to create employee. Possible duplicate entry."),
     ERR_UNKNOWN("ERR_UNKNOWN", "Unknown error, please contact support.");
 
     public final String code;
