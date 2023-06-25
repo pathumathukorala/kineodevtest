@@ -1,6 +1,7 @@
 package com.e3.test.service;
 
 import com.e3.test.entity.Company;
+import com.e3.test.exception.BusinessException;
 import com.e3.test.repository.CompanyRepository;
 import com.e3.test.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,18 @@ public class CompanyService {
             companyRepository.delete(companyId);
         }
         else {
-            //TODO throw businessexception
+            throw new BusinessException("ERR_001");
         }
     }
 
     public Company findCompanyById(Long companyId) {
-        return companyRepository.findOne(companyId);
+        Company company =  companyRepository.findOne(companyId);
+
+        if (company == null) {
+            throw new BusinessException("ERR_002");
+        }
+
+        return company;
     }
 
 }

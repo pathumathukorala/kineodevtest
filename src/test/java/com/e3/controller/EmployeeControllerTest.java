@@ -1,4 +1,4 @@
-package com.e3.controllers;
+package com.e3.controller;
 
 import com.e3.test.contoller.EmployeeController;
 import com.e3.test.entity.Company;

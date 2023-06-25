@@ -15,11 +15,11 @@ public class EmployeeRequestDto {
     private Long id;
 
     @NotNull(message = "First name should not be empty.")
-    //@Pattern(regexp = "[a-zA-Z]")
+    @Pattern(regexp = "^[A-Za-z-'\\s]*$", message = "Invalid characters in First Name.")
     private String firstName;
 
     @NotNull(message = "Last name should not be empty.")
-    //@Pattern(regexp = "[a-zA-Z]")
+    @Pattern(regexp = "^[A-Za-z-'\\s]*$", message = "Invalid characters in Last Name.")
     private String lastName;
 
     @NotNull(message = "Employee must be assigned to a company.")

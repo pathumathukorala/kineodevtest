@@ -1,7 +1,6 @@
-package com.e3.controllers;
+package com.e3.controller;
 
 import com.e3.test.contoller.CompanyController;
-import com.e3.test.repository.CompanyRepository;
 import com.e3.test.entity.Company;
 import com.e3.test.service.CompanyService;
 import org.junit.Before;
