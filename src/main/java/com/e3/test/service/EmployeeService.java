@@ -4,6 +4,7 @@ import com.e3.test.dto.EmployeeRequestDto;
 import com.e3.test.dto.EmployeeSearchDto;
 import com.e3.test.entity.Company;
 import com.e3.test.entity.Employee;
+import com.e3.test.exception.BusinessException;
 import com.e3.test.repository.CompanyRepository;
 import com.e3.test.repository.EmployeeRepository;
 import org.springframework.data.domain.Sort;
@@ -27,14 +28,29 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long employeeId) {
-        return employeeRepository.findOne(employeeId);
+        Employee employee = employeeRepository.findOne(employeeId);
+
+        if (employee == null) {
+            throw new BusinessException("ERR_003");
+        }
+
+        return employee;
     }
 
-    public Boolean deleteEmployeeById(Long employeeId) {
-        employeeRepository.delete(employeeId);
+    public void deleteEmployeeById(Long employeeId) {
+        Employee employee = employeeRepository.findOne(employeeId);
 
-        // TODO implement businessexception
-        return Boolean.TRUE;
+        if (employee == null) {
+            throw new BusinessException("ERR_003");
+        }
+
+        try {
+            employeeRepository.delete(employeeId);
+        }
+        catch (Exception ex) {
+            throw new BusinessException("ERR_004");
+        }
+
     }
 
     public List<Employee> searchEmployees(EmployeeSearchDto searchDto) {
@@ -71,14 +87,14 @@ public class EmployeeService {
         Company company = companyRepository.findOne(requestDto.getCompanyId());
 
         if (company != null) {
+
             Employee employee = Employee.build(requestDto.getId(),
                     requestDto.getFirstName(), requestDto.getLastName(), company);
 
             return employeeRepository.save(employee);
         }
         else {
-            // TODO throw businessexception
-            return null;
+            throw new BusinessException("ERR_002");
         }
     }
 }
